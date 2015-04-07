@@ -135,15 +135,15 @@ Point offset(const Mat &img1, const Mat &img2, int level) {
 }
 
 
-const int INF = 99999999;
 void align_all(vector<Mat> image_list) {
+    vector<Mat> origin_list = image_list;
     // 先黑白化
     for (Mat &img: image_list) {
         img = black_white(img);
     }
 
     vector<Point> offset_list = {Point(0, 0)}; // 相對於第一張的offset
-    int minx = INF, miny = INF, maxx = -INF, maxy = -INF;
+    int minx = 0, miny = 0, maxx = 0, maxy = 0;
     for (int i = 0; i < image_list.size() - 1; i++) {
         Point off = offset(image_list[i], image_list[i + 1], 0);
         cout << "offset = " << off << endl;
@@ -158,7 +158,7 @@ void align_all(vector<Mat> image_list) {
     int new_height = image_list[0].rows - (maxy - miny);
     for(int i = 0; i < image_list.size(); i++) {
         int x = maxx - offset_list[i].x, y = maxy - offset_list[i].y;
-        Mat cutoff = Mat(image_list[i], Rect(x, y, new_width, new_height));
+        Mat cutoff = Mat(origin_list[i], Rect(x, y, new_width, new_height));
         imwrite("aligned" + to_string(i) + ".jpg", cutoff);
     }
 }
