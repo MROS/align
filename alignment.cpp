@@ -77,7 +77,6 @@ int to_pos(int x) {
 }
 
 // 回傳 xor 且 exclusion bitmap 之後與整體的比值
-// img1, img2先進行預處理程相同大小
 double diff_grade(Mat &img1, Mat &img2) {
     Mat eximg1 = exclusion_bitmap(img1);
     Mat eximg2 = exclusion_bitmap(img2);
@@ -92,6 +91,7 @@ double diff_grade(Mat &img1, Mat &img2) {
             }
         }
     }
+    cout << "count = " << count << endl;
     double total = img1.cols * img1.rows;
     return (count / total);
 }
@@ -109,7 +109,7 @@ Point offset(const Mat &img1, const Mat &img2, int level) {
     }
     next_level_offset *= 2;
     int direction[] = {-1, 0, 1};
-    Point ans(0, 0);
+    Point ans = next_level_offset;
     double maxrate = 0;
     cout << "offset level = " << level << endl;
     for (int i: direction) {
@@ -130,7 +130,7 @@ Point offset(const Mat &img1, const Mat &img2, int level) {
         }
     }
     cout << "offset = " << ans << endl;
-    cout << "============== one level end =====================" << endl;
+    cout << "============== a level end =====================" << endl;
     return ans;
 }
 
