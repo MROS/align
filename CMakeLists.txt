@@ -1,0 +1,6 @@
+cmake_minimum_required (VERSION 2.8)
+project (align)
+SET(CMAKE_CXX_FLAGS "-std=c++11")
+find_package( OpenCV REQUIRED )
+add_executable(align main.cpp alignment.h alignment.cpp util.h util.cpp matrix.h matrix.cpp)
+target_link_libraries( align ${OpenCV_LIBS} )
