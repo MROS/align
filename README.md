@@ -13,14 +13,13 @@ cd build
 cmake .. # 生成Makefile
 make
 ```
-然後就能得到執行檔 HDRcpp
+然後就能得到執行檔 align
 
 ## 目前使用方式
 ```
-align image_name output_name
+align image1 image2 image3 .....
 ```
 
 ## 問題
 
-當照片過暗時，中位數之強度為0，故根本無法辨識，致使對齊不可能
-可能的解決法為四分之一
+當照片過暗時，中位數之強度為0，故根本無法辨識，致使對齊不可能，可能的解決法為將分隔設為四分之一
